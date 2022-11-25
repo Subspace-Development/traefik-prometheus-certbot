@@ -59,7 +59,7 @@ resource "civo_kubernetes_cluster" "ssd-dev" {
   firewall_id = civo_firewall.ssd-dev-firewall.id
   
   pools {
-    size = element(data.civo_size.xsmall.sizes, 1).name
+    size = element(data.civo_size.xsmall.sizes, var.civo_cluster_node_size).name
     node_count = var.civo_cluster_nodes
   }
 
