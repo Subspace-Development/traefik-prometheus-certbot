@@ -26,3 +26,9 @@ variable "civo_cluster_nodes" {
   description = "Kubernetes node count"
   default = 1
 }
+
+variable "civo_cluster_node_size" {
+  type = number
+  description = "Node size for each node in the cluster"
+  default = 0
+}
