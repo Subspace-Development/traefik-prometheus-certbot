@@ -32,3 +32,18 @@ variable "civo_cluster_node_size" {
   description = "Node size for each node in the cluster"
   default = 0
 }
+
+variable "cloudflare_email" {
+  type        = string
+  description = "clouflare email address"
+}
+
+variable "cloudflare_api_token" {
+  type        = string
+  description = "cloudflare api token"
+}
+
+variable "cloudflare_zone" {
+  type        = string
+  description = "clouflare domain name"
+}

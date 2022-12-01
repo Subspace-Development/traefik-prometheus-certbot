@@ -25,3 +25,12 @@ output "cluster_ready_state" {
 output "civo_loadbalancer_output" {
   value = data.civo_loadbalancer.ssd-dev-lb.public_ip
 }
+
+output "record" {
+  value = cloudflare_record.record.hostname
+}
+
+output "metadata" {
+  value       = cloudflare_record.record.metadata
+  sensitive   = true
+}

@@ -9,6 +9,11 @@ terraform {
       source = "hashicorp/local"
       version = "2.1.0"
     }
+
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "~> 3.0"
+    }
   }
 }
 
@@ -18,3 +23,8 @@ provider "civo" {
 }
 
 provider "local" {}
+
+provider "cloudflare" {
+  //email   = var.cloudflare_email
+  api_token = var.cloudflare_api_token
+}

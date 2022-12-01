@@ -10,6 +10,10 @@ data "civo_size" "xsmall" {
   }
 }
 
+data "cloudflare_zone" "this" {
+  name = var.cloudflare_zone
+}
+
 resource "civo_firewall" "ssd-dev-firewall" {
   name = "ssd-dev-firewall"
   create_default_rules = false
@@ -76,4 +80,15 @@ resource "time_sleep" "wait_60_seconds" {
 data "civo_loadbalancer" "ssd-dev-lb" {
   depends_on = [time_sleep.wait_60_seconds]
   name = "ssd-dev-kube-system-traefik"
+}
+
+resource "cloudflare_record" "record" {
+  depends_on = [
+    data.civo_loadbalancer.ssd-dev-lb
+  ]
+  zone_id = data.cloudflare_zone.this.id
+  name    = var.civo_cluster_name
+  value   = data.civo_loadbalancer.ssd-dev-lb.public_ip
+  type    = "A"
+  proxied = false
 }
