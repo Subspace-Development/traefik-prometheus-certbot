@@ -92,3 +92,7 @@ resource "cloudflare_record" "record" {
   type    = "A"
   proxied = false
 }
+
+resource "helmfile_release_set" "deploy_config" {
+  content = file("./helmfile.yaml")
+}

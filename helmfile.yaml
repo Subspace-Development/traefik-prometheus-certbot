@@ -1,0 +1,41 @@
+repositories:
+  - name: subspace-dev
+    url: https://subspace-development.github.io
+
+releases:
+- name: setup-traefik
+  namespace: kube-system
+  chart: subspace-dev/setup-traefik
+  set:
+  - name: ingress.enabled
+    value: true
+  - name: ingress.hostname
+    value: "lb.ssd-dev.subspacedev.io"
+  - name: ingress.tls
+    value: true
+  - name: ingress.traefikUser
+    value: "YWRtaW46JGFwcjEkQ0JubDZBL00kSE1HUXFZaW9YVkRNeS5ReVhZcUxWMAoK"
+  - name: ingress.letsencryptUser
+    value: "redstoneeditor@gmail.com"
+
+- name: setup-grafana
+  namespace: monitoring
+  chart: subspace-dev/setup-grafana
+  set:
+  - name: ingress.enabled
+    value: true
+  - name: ingress.hostname
+    value: "grafana.ssd-dev.subspacedev.io"
+  - name: ingress.tls
+    value: true
+
+- name: deploy-app
+  namespace: monitoring
+  chart: subspace-dev/deploy-app
+  set:
+  - name: ingress.enabled
+    value: true
+  - name: ingress.hostname
+    value: "app.ssd-dev.subspacedev.io"
+  - name: ingress.tls
+    value: true
